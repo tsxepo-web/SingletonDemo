@@ -8,19 +8,19 @@ namespace SingletonDemo
 {
     public sealed class Singleton
     {
+        private static readonly Lazy<Singleton> lazyObj = new Lazy<Singleton>(() => new Singleton());
         private Singleton() { }
 
         public static Singleton GetInstance
         {
             get
             {
-                return NestedSingleton.instance;
+                return lazyObj.Value;
             }
         }
-        private class NestedSingleton
+        public void DisplayMessage()
         {
-            static NestedSingleton() { }
-            internal static readonly Singleton instance = new();
+            Console.WriteLine("Displaying message");
         }
     }
 }
