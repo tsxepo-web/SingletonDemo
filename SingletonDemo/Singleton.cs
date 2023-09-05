@@ -8,16 +8,19 @@ namespace SingletonDemo
 {
     public sealed class Singleton
     {
-        private static Singleton instance = new Singleton();
-        static Singleton() { }
         private Singleton() { }
 
-        public static Singleton getInstance
+        public static Singleton GetInstance
         {
             get
             {
-                return instance;
+                return NestedSingleton.instance;
             }
+        }
+        private class NestedSingleton
+        {
+            static NestedSingleton() { }
+            internal static readonly Singleton instance = new();
         }
     }
 }
