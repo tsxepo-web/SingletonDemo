@@ -8,25 +8,14 @@ namespace SingletonDemo
 {
     public sealed class Singleton
     {
-        private static Singleton instance = null;
-        private static readonly object instanceLock = new();
-        private Singleton()
-        {
-
-        }
+        private static Singleton instance = new Singleton();
+        static Singleton() { }
+        private Singleton() { }
 
         public static Singleton getInstance
         {
             get
             {
-                if (instance == null)
-                {
-                    lock (instanceLock)
-                    {
-                        if (instance == null)
-                        { instance = new Singleton(); }
-                    }
-                }
                 return instance;
             }
         }
